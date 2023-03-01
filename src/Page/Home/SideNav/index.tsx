@@ -15,21 +15,21 @@ const SideNav: React.FC<SideNavProps> = (props) => {
 
   const items = [
     {
-      id: 1,
+      id: "1",
       title: "BÁN HÀNG",
       icon: <Components.Icons.IconCart className="mb-1" />,
       link: "/staff",
       children: [],
     },
     {
-      id: 2,
+      id: "2",
       title: "TỒN KHO",
       icon: <Components.Icons.IconBox className="mb-1" />,
       link: "/staff",
       children: [],
     },
     {
-      id: 3,
+      id: "3",
       title: "NHÂN SỰ",
       icon: <Components.Icons.IconUser className="mb-1" />,
       link: "/staff",
@@ -61,7 +61,7 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       ],
     },
     {
-      id: 4,
+      id: "4",
       title: "GIAO HÀNG",
       icon: <Components.Icons.IconTruck className="mb-1" />,
       link: "/staff",
@@ -87,17 +87,21 @@ const SideNav: React.FC<SideNavProps> = (props) => {
               width: "240px",
             }}
             placement="right"
-            title={m.children.map((c) => (
-              <Ant.Menu.Item
-                key={c.id}
-                className="py-2 my-1 rounded text-gray-400 hover:text-white"
-              >
-                <Link to={c.link} className="flex px-2 hover:text-white">
-                  {c.icon}
-                  <span>{c.title}</span>
-                </Link>
-              </Ant.Menu.Item>
-            ))}
+            title={
+              <Ant.Menu style={{ background: "transparent" }}>
+                {m.children.map((c) => (
+                  <Ant.Menu.Item
+                    key={c.id}
+                    className="py-2 my-1 rounded text-gray-400 hover:text-white"
+                  >
+                    <Link to={c.link} className="flex items-center px-2 hover:text-white">
+                      {c.icon}
+                      <span>{c.title}</span>
+                    </Link>
+                  </Ant.Menu.Item>
+                ))}
+              </Ant.Menu>
+            }
             key={m.id}
           >
             <Ant.Menu.Item

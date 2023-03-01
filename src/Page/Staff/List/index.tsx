@@ -78,7 +78,11 @@ const List: React.FC<ListProps> = (props) => {
   return (
     <Ant.Layout>
       <Ant.Layout.Header
-        style={{ height: "auto", background: "transparent", padding: "15px 0 0 0" }}
+        style={{
+          height: "auto",
+          background: "transparent",
+          padding: "15px 0 0 0",
+        }}
       >
         <h3 className="mt-0 mb-3 text-2xl font-semibold px-5">Nhân viên</h3>
         <p className="m-0 mb-3 text-sm text-gray-400 px-5">Tất cả (7)</p>
@@ -124,7 +128,12 @@ const List: React.FC<ListProps> = (props) => {
         </Ant.Form>
       </Ant.Layout.Header>
 
-      <Ant.Table columns={columns} dataSource={data} sticky />
+      <Ant.Table
+        columns={columns}
+        dataSource={data}
+        sticky={{ offsetHeader: 65 }}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </Ant.Layout>
   );
 };
