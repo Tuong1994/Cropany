@@ -1,0 +1,29 @@
+.home {
+  .home__icon {
+    cursor: pointer;
+    &:hover {
+      color: #0168fa;
+    }
+  }
+  .home__logo {
+    font-size: 22px;
+    font-weight: 700;
+    span {
+      &:nth-child(1) {
+        color: #000;
+      }
+      &:nth-child(2) {
+        font-weight: 400;
+        color: #0168fa;
+      }
+    }
+  }
+  .home__search {
+    border-radius: 50px;
+  }
+}
+
+.ant-menu-item-selected {
+  background-color: #0168fa !important;
+  color: #fff !important;
+}
