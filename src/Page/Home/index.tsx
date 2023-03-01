@@ -2,7 +2,7 @@ import React from "react";
 import * as Ant from "antd";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import SideNav from "./SideNav";
+import SideNav from "./SideNav/SideNav";
 
 interface HomeProps {}
 

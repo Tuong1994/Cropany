@@ -1,0 +1,21 @@
+.staff {
+  .staff__table {
+    .ant-table-thead {
+      .ant-table-cell {
+        font-size: 12px;
+        color: #666;
+      }
+    }
+    .ant-table-tbody {
+      .ant-table-row {
+        &:hover {
+            background: #dadada;
+        }
+      }
+      .ant-table-cell {
+        font-size: 14px;
+        padding: 8px 5px;
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import IconClock from "./IconClock";
 import IconProject from "./IconProject";
 import IconDocument from "./IconDocument";
 import IconStaff from "./IconStaff";
+import IconColumns from "./IconCollumns";
 
 export {
   IconBar,
@@ -26,4 +27,5 @@ export {
   IconProject,
   IconDocument,
   IconStaff,
+  IconColumns,
 };

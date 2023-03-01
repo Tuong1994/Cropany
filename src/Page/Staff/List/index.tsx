@@ -1,14 +1,23 @@
 import React from "react";
 import * as Ant from "antd";
+import * as Components from "../../../Components";
 import type { ColumnsType } from "antd/es/table";
 
 interface ListProps {}
 
 interface DataType {
   key: React.Key;
+  avatar: string;
   name: string;
-  age: number;
-  address: string;
+  firstName: string;
+  lastName: string;
+  position: string;
+  office: string;
+  department: string;
+  staffId: string;
+  jobType: string;
+  status: string;
+  bg: string;
 }
 
 const List: React.FC<ListProps> = (props) => {
@@ -16,67 +25,230 @@ const List: React.FC<ListProps> = (props) => {
     minWidth: "100px",
   };
 
-  const data: DataType[] = [];
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      name: `Edward ${i}`,
-      age: 32,
-      address: `London Park no. ${i}`,
-    });
-  }
+  const items: Ant.MenuProps["items"] = [
+    {
+      key: "1",
+      type: "group",
+      label: (
+        <div className="text-black font-semibold">Chọn cột muốn hiển thị</div>
+      ),
+      children: [
+        {
+          key: "avatar",
+          label: <Ant.Checkbox>Avatar</Ant.Checkbox>,
+        },
+        {
+          key: "name",
+          label: <Ant.Checkbox>Họ Và Tên</Ant.Checkbox>,
+        },
+        {
+          key: "position",
+          label: <Ant.Checkbox>Chức năng</Ant.Checkbox>,
+        },
+        {
+          key: "office",
+          label: <Ant.Checkbox>Văn phòng</Ant.Checkbox>,
+        },
+        {
+          key: "department",
+          label: <Ant.Checkbox>Phòng Ban</Ant.Checkbox>,
+        },
+        {
+          key: "staffId",
+          label: <Ant.Checkbox>Mã Nhân Viên</Ant.Checkbox>,
+        },
+        {
+          key: "jobType",
+          label: <Ant.Checkbox>Loại Hình Công Việc</Ant.Checkbox>,
+        },
+        {
+          key: "status",
+          label: <Ant.Checkbox>Trạng Thái</Ant.Checkbox>,
+        },
+      ],
+    },
+  ];
+
+  const data: DataType[] = [
+    {
+      key: "1",
+      avatar: "",
+      name: "Nhâm Bổn Tường",
+      firstName: "Tường",
+      lastName: "Nhâm",
+      position: "Software Engineer",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2007",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(191, 64, 64)",
+    },
+    {
+      key: "2",
+      avatar: "",
+      name: "Nguyễn Hữu An",
+      firstName: "An",
+      lastName: "Nguyễn",
+      position: "Software Engineer",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2006",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(45, 210, 210)",
+    },
+    {
+      key: "3",
+      avatar: "",
+      name: "Nguyễn Tấn Đức",
+      firstName: "Đức",
+      lastName: "Nguyễn",
+      position: "Software Engineer",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2005",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(58, 94, 120)",
+    },
+    {
+      key: "4",
+      avatar: "",
+      name: "Nguyễn Kim Quy",
+      firstName: "Quy",
+      lastName: "Nguyễn",
+      position: "Software Engineer",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2004",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(134, 113, 45)",
+    },
+    {
+      key: "5",
+      avatar: "",
+      name: "Nguyễn Đức Thuận",
+      firstName: "Thuận",
+      lastName: "Nguyễn",
+      position: "Software Engineer",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2002",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(191, 130, 64)",
+    },
+    {
+      key: "6",
+      avatar: "",
+      name: "Huỳnh Sự",
+      firstName: "Sự",
+      lastName: "Huỳnh",
+      position: "General Manager",
+      office: "Văn phòng chính",
+      department: "Software",
+      staffId: "2001",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(58, 120, 64)",
+    },
+    {
+      key: "7",
+      avatar: "",
+      name: "Võ Duy Tuấn",
+      firstName: "Tuấn",
+      lastName: "Võ",
+      position: "CEO",
+      office: "Văn phòng chính",
+      department: "BOD",
+      staffId: "2000",
+      jobType: "Nhân viên chính thức",
+      status: "Có hiệu lực",
+      bg: "rgb(58, 120, 64)",
+    },
+  ];
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Full Name",
+      title: "",
+      dataIndex: "avatar",
+      key: "avatar",
+      width: 55,
+      align: "center",
+      render: (_t, s) => (
+        <Ant.Avatar style={{ background: s.bg }}>
+          {s.firstName.charAt(0)}
+        </Ant.Avatar>
+      ),
+    },
+    {
+      title: "HỌ VÀ TÊN",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "CHỨC DANH",
+      dataIndex: "position",
+      key: "position",
     },
     {
-      title: "Column 1",
-      dataIndex: "address",
-      key: "1",
+      title: "VĂN PHÒNG",
+      dataIndex: "office",
+      key: "office",
+      width: 150,
     },
     {
-      title: "Column 2",
-      dataIndex: "address",
-      key: "2",
+      title: "PHÒNG BAN",
+      dataIndex: "department",
+      key: "department",
+      width: 120,
     },
     {
-      title: "Column 3",
-      dataIndex: "address",
-      key: "3",
+      title: "MÃ NHÂN VIÊN",
+      dataIndex: "staffId",
+      key: "staffId",
+      width: 125,
+      align: "center",
     },
     {
-      title: "Column 4",
-      dataIndex: "address",
-      key: "4",
+      title: "LOẠI HÌNH CÔNG VIỆC",
+      dataIndex: "jobType",
+      key: "jobType",
+      width: 180,
     },
     {
-      title: "Column 5",
-      dataIndex: "address",
-      key: "5",
+      title: "TRẠNG THÁI",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => (
+        <Ant.Tag color="green" className="border-0">
+          {text}
+        </Ant.Tag>
+      ),
     },
     {
-      title: "Column 6",
-      dataIndex: "address",
-      key: "6",
+      title: (
+        <Ant.Dropdown
+          menu={{ items }}
+          placement="bottomRight"
+          trigger={["click"]}
+          arrow
+        >
+          <div title="Ẩn/Hiển thị cột dữ liệu" className="cursor-pointer">
+            <Components.Icons.IconColumns />
+          </div>
+        </Ant.Dropdown>
+      ),
+      dataIndex: "",
+      key: "action",
+      width: 50,
     },
-    {
-      title: "Column 7",
-      dataIndex: "address",
-      key: "7",
-    },
-    { title: "Column 8", dataIndex: "address", key: "8" },
   ];
 
   return (
-    <Ant.Layout>
+    <Ant.Layout className="staff">
       <Ant.Layout.Header
         style={{
           height: "auto",
@@ -91,37 +263,51 @@ const List: React.FC<ListProps> = (props) => {
           <Ant.Row gutter={16} align="middle">
             <Ant.Col span={4}>
               <Ant.Form.Item className="m-0">
-                <Ant.Input />
+                <Ant.Input placeholder="Tên, chức vụ, điện thoại, email" />
               </Ant.Form.Item>
             </Ant.Col>
 
             <Ant.Col span={2}>
               <Ant.Form.Item className="m-0">
-                <Ant.Select dropdownStyle={selectDropdownStyle} />
+                <Ant.Select
+                  placeholder="Văn phòng"
+                  dropdownStyle={selectDropdownStyle}
+                />
               </Ant.Form.Item>
             </Ant.Col>
 
             <Ant.Col span={2}>
               <Ant.Form.Item className="m-0">
-                <Ant.Select dropdownStyle={selectDropdownStyle} />
+                <Ant.Select
+                  placeholder="Phòng ban"
+                  dropdownStyle={selectDropdownStyle}
+                />
               </Ant.Form.Item>
             </Ant.Col>
 
             <Ant.Col span={3}>
               <Ant.Form.Item className="m-0">
-                <Ant.Select dropdownStyle={selectDropdownStyle} />
+                <Ant.Select
+                  placeholder="Loại hình công việc"
+                  dropdownStyle={selectDropdownStyle}
+                />
               </Ant.Form.Item>
             </Ant.Col>
 
             <Ant.Col span={2}>
               <Ant.Form.Item className="m-0">
-                <Ant.Select dropdownStyle={selectDropdownStyle} />
+                <Ant.Select
+                  placeholder="Trạng thái"
+                  dropdownStyle={selectDropdownStyle}
+                />
               </Ant.Form.Item>
             </Ant.Col>
 
             <Ant.Col>
               <Ant.Form.Item className="m-0">
-                <Ant.Button>Lọc</Ant.Button>
+                <Ant.Button className="border-blue-400 text-blue-400">
+                  Lọc
+                </Ant.Button>
               </Ant.Form.Item>
             </Ant.Col>
           </Ant.Row>
@@ -129,6 +315,7 @@ const List: React.FC<ListProps> = (props) => {
       </Ant.Layout.Header>
 
       <Ant.Table
+        className="staff__table"
         columns={columns}
         dataSource={data}
         sticky={{ offsetHeader: 65 }}

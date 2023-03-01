@@ -1,29 +1,46 @@
 .home {
-  .home__icon {
-    cursor: pointer;
-    &:hover {
-      color: #0168fa;
-    }
-  }
-  .home__logo {
-    font-size: 22px;
-    font-weight: 700;
-    span {
-      &:nth-child(1) {
-        color: #000;
-      }
-      &:nth-child(2) {
-        font-weight: 400;
+  .home__header {
+    .header__icon {
+      cursor: pointer;
+      &:hover {
         color: #0168fa;
       }
     }
+    .header__logo {
+      font-size: 22px;
+      font-weight: 700;
+      span {
+        &:nth-child(1) {
+          color: #000;
+        }
+        &:nth-child(2) {
+          font-weight: 400;
+          color: #0168fa;
+        }
+      }
+    }
+    .header__search {
+      border-radius: 50px;
+    }
   }
-  .home__search {
-    border-radius: 50px;
+  .home__sidenav {
+    .sidenav__menu {
+      .ant-menu-item {
+        padding: 10px;
+        height: auto;
+        padding-inline: 0;
+        overflow: unset;
+        border-radius: 4px;
+        border: 0.3px solid transparent;
+        &:hover {
+          border-color: #bbb;
+        }
+      }
+    }
   }
 }
 
 .ant-menu-item-selected {
-  background-color: #0168fa !important;
+  background-color: #1d4ed8 !important;
   color: #fff !important;
 }

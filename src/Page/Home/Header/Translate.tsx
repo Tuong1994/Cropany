@@ -49,7 +49,7 @@ const Translate: React.FC<TranslateProps> = (props) => {
     >
       <a
         href="#"
-        className="cursor-pointer font-semibold text-xs text-gray-400"
+        className="cursor-pointer font-semibold text-sm text-gray-400"
       >
         VN
       </a>
