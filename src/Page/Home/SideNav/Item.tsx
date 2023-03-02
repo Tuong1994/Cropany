@@ -1,18 +1,18 @@
 import React from "react";
-import * as Components from "../../../Components";
 import * as Ant from "antd";
 import { Link } from "react-router-dom";
-import { IChildList, MenuItem } from "./SideNav";
+import { MenuItem } from ".";
 
 interface ItemProps {
   title: string;
   link: string;
   icon: React.ReactNode;
   list: MenuItem[];
+  isOpen: boolean;
 }
 
 const Item: React.FC<ItemProps> = (props) => {
-  const { title, icon, link, list } = props;
+  const { title, icon, link, list, isOpen } = props;
 
   const menuItemStyle: React.CSSProperties = {
     overflow: "unset",
@@ -26,13 +26,11 @@ const Item: React.FC<ItemProps> = (props) => {
       overlayStyle={{
         width: "240px",
       }}
-      placement="right"
+      placement="rightTop"
+      overlayClassName={isOpen ? "hidden" : ""}
       title={<Ant.Menu style={{ background: "transparent" }} items={list} />}
     >
-      <div
-        // className="py-2 border border-transparent hover:bg-blue-700 hover:border-white"
-        style={menuItemStyle}
-      >
+      <div style={menuItemStyle}>
         <Link to={link} className="flex flex-col items-center">
           <span className="mb-1">{icon}</span>
           <small

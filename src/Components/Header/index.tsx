@@ -1,22 +1,37 @@
 import React from "react";
 import * as Ant from "antd";
-import * as Components from "../../../Components";
+import * as Components from "..";
 import Translate from "./Translate";
 import UserSetting from "./UserSetting";
 
-interface HeaderProps {}
+interface HeaderProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const Header: React.FC<HeaderProps> = (props) => {
+  const { isOpen, setIsOpen } = props;
+
   return (
     <Ant.Layout.Header
-      className="border-b px-5 bg-white home__header"
-      style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}
+      className="border-b px-5 bg-white header"
+      style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}
     >
       <Ant.Row justify="space-between" align="middle">
         <Ant.Col>
           <Ant.Row gutter={16} align="middle">
             <Ant.Col>
-              <Components.Icons.IconBar className="header__icon" />
+              {!isOpen ? (
+                <Components.Icons.IconBar
+                  className="header__icon"
+                  onClick={() => setIsOpen(!isOpen)}
+                />
+              ) : (
+                <Components.Icons.IconBarClose
+                  className="header__icon"
+                  onClick={() => setIsOpen(!isOpen)}
+                />
+              )}
             </Ant.Col>
             <Ant.Col>
               <a className="header__logo" href="#">

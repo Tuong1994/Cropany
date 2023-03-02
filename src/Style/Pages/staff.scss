@@ -3,13 +3,14 @@
     .ant-table-thead {
       .ant-table-cell {
         font-size: 12px;
+        padding: 8px 5px;
         color: #666;
       }
     }
     .ant-table-tbody {
       .ant-table-row {
         &:hover {
-            background: #dadada;
+          background: #dadada;
         }
       }
       .ant-table-cell {

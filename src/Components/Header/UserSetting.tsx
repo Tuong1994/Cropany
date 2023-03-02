@@ -1,6 +1,6 @@
 import React from "react";
 import * as Ant from "antd";
-import * as Components from "../../../Components";
+import * as Components from "..";
 import { Link } from "react-router-dom";
 
 interface UserSettingProps {}

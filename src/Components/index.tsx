@@ -1,3 +1,4 @@
 import * as Icons from "./Icons";
+import Header from "./Header";
 
-export { Icons };
+export { Icons, Header };
