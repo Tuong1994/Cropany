@@ -22,8 +22,10 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
     >
       <Ant.Row justify="space-between">
         <Ant.Col>
-          <h3 className="mt-0 mb-3 text-2xl font-semibold px-5">Nhân viên</h3>
-          <p className="m-0 mb-3 text-sm text-gray-400 px-5">Tất cả (7)</p>
+          <Ant.Typography.Title className="px-5" level={3}>
+            Nhân viên
+          </Ant.Typography.Title>
+          <p className="m-0 mb-3 text-sm text-gray-500 px-5">Tất cả (7)</p>
         </Ant.Col>
         <Ant.Col>
           <Ant.Button
@@ -44,13 +46,14 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
             </Ant.Form.Item>
           </Ant.Col>
 
-          <Ant.Col span={2}>
+          <Ant.Col>
             <Ant.Form.Item className="m-0">
               <Ant.Select
                 showSearch
                 placeholder="Văn phòng"
-                dropdownStyle={selectDropdownStyle}
                 optionFilterProp="children"
+                dropdownStyle={selectDropdownStyle}
+                dropdownMatchSelectWidth
                 options={options.office}
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -61,13 +64,14 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
             </Ant.Form.Item>
           </Ant.Col>
 
-          <Ant.Col span={2}>
+          <Ant.Col>
             <Ant.Form.Item className="m-0">
               <Ant.Select
                 showSearch
                 placeholder="Phòng ban"
-                dropdownStyle={selectDropdownStyle}
                 optionFilterProp="children"
+                dropdownStyle={selectDropdownStyle}
+                dropdownMatchSelectWidth
                 options={options.department}
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -78,12 +82,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
             </Ant.Form.Item>
           </Ant.Col>
 
-          <Ant.Col span={3}>
+          <Ant.Col>
             <Ant.Form.Item className="m-0">
               <Ant.Select
                 placeholder="Loại hình công việc"
-                dropdownStyle={selectDropdownStyle}
                 optionFilterProp="children"
+                dropdownStyle={selectDropdownStyle}
+                dropdownMatchSelectWidth
                 options={options.jobType}
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -94,12 +99,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
             </Ant.Form.Item>
           </Ant.Col>
 
-          <Ant.Col span={2}>
+          <Ant.Col>
             <Ant.Form.Item className="m-0">
               <Ant.Select
                 placeholder="Trạng thái"
-                dropdownStyle={selectDropdownStyle}
                 optionFilterProp="children"
+                dropdownStyle={selectDropdownStyle}
+                dropdownMatchSelectWidth
                 options={options.staffStatus}
                 filterOption={(input, option) =>
                   (option?.label ?? "")

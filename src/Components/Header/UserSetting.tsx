@@ -12,9 +12,7 @@ const UserSetting: React.FC<UserSettingProps> = (props) => {
       type: "group",
       label: (
         <div className="border-b py-1">
-          <p className="text-black text-lg mb-1 font-bold">
-            Nhâm Bổn Tường
-          </p>
+          <p className="text-black text-lg mb-1 font-bold">Nhâm Bổn Tường</p>
           <p className="text-xs">Software Engineer</p>
         </div>
       ),
@@ -22,7 +20,7 @@ const UserSetting: React.FC<UserSettingProps> = (props) => {
         {
           key: "update",
           label: (
-            <Link to="#" className="flex">
+            <Link to="/staff/edit" state={{ id: "1" }} className="flex">
               <span className="mr-1 flex justify-center items-center">
                 <Components.Icons.IconEdit className="text-blue-600" />
               </span>
@@ -53,7 +51,11 @@ const UserSetting: React.FC<UserSettingProps> = (props) => {
       trigger={["click"]}
       arrow
     >
-      <Ant.Avatar className="cursor-pointer bg-red-700" size={32} icon={<div>T</div>} />
+      <Ant.Avatar
+        className="cursor-pointer bg-red-700"
+        size={32}
+        icon={<div>T</div>}
+      />
     </Ant.Dropdown>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import * as Ant from "antd";
+import * as Components from "../../../Components";
 import type { ColumnsType } from "antd/es/table";
 import {
   EDepartment,
@@ -15,10 +16,48 @@ import TableDropdown from "./TableDropdown";
 
 interface ListProps {}
 
+export interface IActiveCol {
+  key: string;
+  active: boolean;
+}
+
 const List: React.FC<ListProps> = (props) => {
   const staffs = useStaffStore((state) => state.staffs);
 
-  const [columns, setColumns] = React.useState<ColumnsType<IStaff>>([
+  const [avatar, setAvatar] = React.useState<IActiveCol>({
+    key: "avatar",
+    active: true,
+  });
+  const [name, setName] = React.useState<IActiveCol>({
+    key: "name",
+    active: true,
+  });
+  const [position, setPosition] = React.useState<IActiveCol>({
+    key: "position",
+    active: true,
+  });
+  const [office, setOffice] = React.useState<IActiveCol>({
+    key: "office",
+    active: true,
+  });
+  const [department, setDepartment] = React.useState<IActiveCol>({
+    key: "department",
+    active: true,
+  });
+  const [staffId, setStaffId] = React.useState<IActiveCol>({
+    key: "",
+    active: false,
+  });
+  const [jobType, setJobType] = React.useState<IActiveCol>({
+    key: "jobType",
+    active: true,
+  });
+  const [status, setStatus] = React.useState<IActiveCol>({
+    key: "status",
+    active: true,
+  });
+
+  const columns: ColumnsType<IStaff> = [
     {
       title: "",
       dataIndex: "avatar",
@@ -126,12 +165,53 @@ const List: React.FC<ListProps> = (props) => {
       ),
     },
     {
-      title: <TableDropdown />,
+      title: "",
       dataIndex: "",
       key: "action",
-      width: 50,
+      filterDropdown: () => {
+        return (
+          <TableDropdown
+            avatar={avatar}
+            name={name}
+            position={position}
+            office={office}
+            department={department}
+            staffId={staffId}
+            jobType={jobType}
+            status={status}
+            setAvatar={setAvatar}
+            setName={setName}
+            setPosition={setPosition}
+            setOffice={setOffice}
+            setDepartment={setDepartment}
+            setStaffId={setStaffId}
+            setJobType={setJobType}
+            setStatus={setStatus}
+          />
+        );
+      },
+      filterIcon: () => {
+        return (
+          <div title="Ẩn/Hiển thị cột dữ liệu" className="cursor-pointer mr-5">
+            <Components.Icons.IconColumns className="text-black" />
+          </div>
+        );
+      },
     },
-  ]);
+  ];
+
+  const filterCols = columns.filter(
+    (c) =>
+      c.key === avatar.key ||
+      c.key === name.key ||
+      c.key === position.key ||
+      c.key === office.key ||
+      c.key === department.key ||
+      c.key === staffId.key ||
+      c.key === jobType.key ||
+      c.key === status.key ||
+      c.key === "action"
+  );
 
   return (
     <Ant.Layout className="staff__list">
@@ -139,7 +219,7 @@ const List: React.FC<ListProps> = (props) => {
 
       <Ant.Table
         className="list__table"
-        columns={columns}
+        columns={filterCols}
         dataSource={staffs}
         sticky={{ offsetHeader: 65 }}
         pagination={{

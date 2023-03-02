@@ -1,7 +1,11 @@
 // LIST
 .staff__list {
   .list__table {
+    .ant-dropdown {
+      left: 10px !important;
+    }
     .ant-table-thead {
+      padding-right: 10px;
       .ant-table-cell {
         font-size: 12px;
         padding: 8px 5px;

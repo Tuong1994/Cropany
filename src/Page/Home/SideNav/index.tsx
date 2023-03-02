@@ -69,7 +69,6 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       label: (
         <Item
           title="BÁN HÀNG"
-          link="/"
           icon={<Components.Icons.IconCart />}
           list={[]}
           isOpen={isOpen}
@@ -81,7 +80,6 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       label: (
         <Item
           title="TỒN KHO"
-          link="/"
           icon={<Components.Icons.IconBox />}
           list={[]}
           isOpen={isOpen}
@@ -93,7 +91,6 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       label: (
         <Item
           title="NHÂN SỰ"
-          link="/staff"
           icon={<Components.Icons.IconUser />}
           list={staffList}
           isOpen={isOpen}
@@ -105,7 +102,6 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       label: (
         <Item
           title="GIAO HÀNG"
-          link="/"
           icon={<Components.Icons.IconTruck />}
           list={[]}
           isOpen={isOpen}
