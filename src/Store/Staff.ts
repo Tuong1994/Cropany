@@ -16,6 +16,7 @@ interface IStaffStore {
   getDetail: (id: string) => void;
   addStaff: (staff: IStaff) => void;
   updateStaff: (id: string, staff: IStaff) => void;
+  changePassword: (id: string, newPass: string) => void;
 }
 
 const useStaffStore = create<IStaffStore>((set, get) => ({
@@ -182,6 +183,15 @@ const useStaffStore = create<IStaffStore>((set, get) => ({
       ...state,
       staffs: state.staffs.map((s) => {
         if (s.id === id) return { ...s, ...staff };
+        return { ...s };
+      }),
+    })),
+
+  changePassword: (id, newPass) =>
+    set((state) => ({
+      ...state,
+      staffs: state.staffs.map((s) => {
+        if (s.id === id) return { ...s, password: newPass };
         return { ...s };
       }),
     })),

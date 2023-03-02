@@ -2,6 +2,7 @@ import React from "react";
 import * as Ant from "antd";
 import { IStaff } from "../../../Models/Staff";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import AddHeader from "./AddHeader";
 import Account from "./Account";
 import Contact from "./Contact";
@@ -17,7 +18,6 @@ const Add: React.FC<AddProps> = (props) => {
 
   const navigate = useNavigate();
 
-  const staff = useStaffStore((state) => state.staff);
   const addStaff = useStaffStore((state) => state.addStaff);
 
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
@@ -49,8 +49,9 @@ const Add: React.FC<AddProps> = (props) => {
     addStaff(newStaff);
     setTimeout(() => {
       form.resetFields();
+      toast.success("Thêm mới thành công")
       setIsSubmitting(false);
-      navigate("/staff/edit", { state: { id: staff.id } });
+      navigate("/staff/edit", { state: { id: newId } });
     }, 500);
   };
 

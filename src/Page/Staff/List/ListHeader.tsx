@@ -1,6 +1,7 @@
 import React from "react";
 import * as Ant from "antd";
 import { useNavigate } from "react-router-dom";
+import options from "../../../Options";
 
 interface ListHeaderProps {}
 
@@ -8,7 +9,7 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
   const navigate = useNavigate();
 
   const selectDropdownStyle: React.CSSProperties = {
-    minWidth: "100px",
+    minWidth: "max-content",
   };
 
   return (
@@ -25,7 +26,11 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
           <p className="m-0 mb-3 text-sm text-gray-400 px-5">Tất cả (7)</p>
         </Ant.Col>
         <Ant.Col>
-          <Ant.Button type="primary" className="mr-5 bg-blue-400 font-semibold" onClick={() => navigate("/staff/add")}>
+          <Ant.Button
+            type="primary"
+            className="mr-5 bg-blue-400 font-semibold"
+            onClick={() => navigate("/staff/add")}
+          >
             Thêm mới nhân viên
           </Ant.Button>
         </Ant.Col>
@@ -45,6 +50,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
                 showSearch
                 placeholder="Văn phòng"
                 dropdownStyle={selectDropdownStyle}
+                optionFilterProp="children"
+                options={options.office}
+                filterOption={(input, option) =>
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
               />
             </Ant.Form.Item>
           </Ant.Col>
@@ -55,6 +67,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
                 showSearch
                 placeholder="Phòng ban"
                 dropdownStyle={selectDropdownStyle}
+                optionFilterProp="children"
+                options={options.department}
+                filterOption={(input, option) =>
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
               />
             </Ant.Form.Item>
           </Ant.Col>
@@ -64,6 +83,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
               <Ant.Select
                 placeholder="Loại hình công việc"
                 dropdownStyle={selectDropdownStyle}
+                optionFilterProp="children"
+                options={options.jobType}
+                filterOption={(input, option) =>
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
               />
             </Ant.Form.Item>
           </Ant.Col>
@@ -73,6 +99,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
               <Ant.Select
                 placeholder="Trạng thái"
                 dropdownStyle={selectDropdownStyle}
+                optionFilterProp="children"
+                options={options.staffStatus}
+                filterOption={(input, option) =>
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
               />
             </Ant.Form.Item>
           </Ant.Col>

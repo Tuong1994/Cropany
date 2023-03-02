@@ -2,6 +2,8 @@ import React from "react";
 import * as Components from "./Components";
 import * as Page from "./Page";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Style/main.scss";
 
 const App: React.FC = () => {
@@ -18,6 +20,8 @@ const App: React.FC = () => {
         <Route path="/staff/add" element={<Page.Staff.Add />} />
         <Route path="/staff/edit" element={<Page.Staff.Edit />} />
       </Routes>
+
+      <ToastContainer />
     </React.Fragment>
   );
 };

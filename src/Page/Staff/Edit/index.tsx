@@ -2,6 +2,7 @@ import React from "react";
 import * as Ant from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IStaff } from "../../../Models/Staff";
+import { toast } from "react-toastify";
 import EditHeader from "./EditHeader";
 import Account from "./Account";
 import ModalPassword from "./ModalPassword";
@@ -21,6 +22,8 @@ const Edit: React.FC<EditProps> = (props) => {
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
+  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+
   const staff = useStaffStore((state) => state.staff);
 
   const getDetail = useStaffStore((state) => state.getDetail);
@@ -31,28 +34,48 @@ const Edit: React.FC<EditProps> = (props) => {
     getDetail(state.id);
   });
 
+  console.log(staff);
+
   React.useEffect(() => {
-    
+    form.setFieldsValue({
+      email: staff?.email ?? "",
+      name: staff?.name ?? "",
+      phone: staff?.phone ?? "",
+      position: staff?.position ?? "",
+      staffId: staff?.staffId ?? "",
+      gender: staff?.gender ?? null,
+      positionType: staff?.positionType ?? null,
+      office: staff?.office ?? null,
+      department: staff?.department ?? null,
+      jobType: staff?.jobType ?? null,
+      timeKeeping: staff?.timeKeeping ?? null,
+      status: staff?.status ?? null,
+    });
   }, [staff]);
 
   const initialValues: IStaff = {
-    email: staff?.email ?? "",
-    name: staff?.name ?? "",
-    phone: staff?.phone ?? "",
-    position: staff?.position ?? "",
-    staffId: staff?.staffId ?? "",
-    gender: staff?.gender ?? null,
-    positionType: staff?.positionType ?? null,
-    office: staff?.office ?? null,
-    department: staff?.department ?? null,
-    jobType: staff?.jobType ?? null,
-    timeKeeping: staff?.timeKeeping ?? null,
-    status: staff?.status ?? null,
+    email: "",
+    name: "",
+    phone: "",
+    position: "",
+    staffId: "",
+    gender: null,
+    positionType: null,
+    office: null,
+    department: null,
+    jobType: null,
+    timeKeeping: null,
+    status: null,
   };
 
   const onSubmit = (staff: IStaff) => {
+    setIsSubmitting(true);
     updateStaff(state.id, staff);
-    setTimeout(() => navigate("/staff"), 500);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      toast.success("Cập nhật thành công");
+      navigate("/staff");
+    }, 500);
   };
 
   return (
@@ -61,6 +84,7 @@ const Edit: React.FC<EditProps> = (props) => {
         <EditHeader />
 
         <Ant.Form
+          form={form}
           layout="vertical"
           initialValues={initialValues}
           onFinish={onSubmit}
@@ -80,14 +104,19 @@ const Edit: React.FC<EditProps> = (props) => {
 
             <Ant.Col span={6}>
               <Ant.Layout.Content className="h-full bg-gray-200 p-5">
-                <Status />
+                <Status isSubmitting={isSubmitting} />
               </Ant.Layout.Content>
             </Ant.Col>
           </Ant.Row>
         </Ant.Form>
       </Ant.Layout>
 
-      <ModalPassword isOpen={isOpen} setIsOpen={setIsOpen} />
+      <ModalPassword
+        id={state.id}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        getDetail={getDetail}
+      />
     </React.Fragment>
   );
 };

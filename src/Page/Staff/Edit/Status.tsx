@@ -2,9 +2,13 @@ import React from "react";
 import * as Ant from "antd";
 import options from "../../../Options";
 
-interface StatusProps {}
+interface StatusProps {
+  isSubmitting: boolean;
+}
 
 const Status: React.FC<StatusProps> = (props) => {
+  const { isSubmitting } = props;
+
   return (
     <React.Fragment>
       <Ant.Form.Item
@@ -42,13 +46,14 @@ const Status: React.FC<StatusProps> = (props) => {
           }
         />
       </Ant.Form.Item>
-      
+
       <Ant.Form.Item>
         <Ant.Button
           type="primary"
           size="large"
           htmlType="submit"
           className="w-full bg-blue-500 rounded"
+          loading={isSubmitting}
         >
           Lưu thông tin
         </Ant.Button>

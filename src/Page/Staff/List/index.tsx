@@ -134,11 +134,11 @@ const List: React.FC<ListProps> = (props) => {
   ]);
 
   return (
-    <Ant.Layout className="staff">
+    <Ant.Layout className="staff__list">
       <ListHeader />
 
       <Ant.Table
-        className="staff__table"
+        className="list__table"
         columns={columns}
         dataSource={staffs}
         sticky={{ offsetHeader: 65 }}

@@ -1,5 +1,6 @@
-.staff {
-  .staff__table {
+// LIST
+.staff__list {
+  .list__table {
     .ant-table-thead {
       .ant-table-cell {
         font-size: 12px;
@@ -17,6 +18,22 @@
         font-size: 14px;
         padding: 8px 5px;
       }
+    }
+  }
+}
+
+// MODAL PASSWORD
+.modal-password {
+  .ant-modal-content {
+    padding: 0;
+    border-radius: 4px;
+    .ant-modal-body {
+      padding: 20px;
+    }
+    .ant-modal-header,
+    .ant-modal-footer {
+      padding: 15px 20px;
+      background: #eee;
     }
   }
 }
