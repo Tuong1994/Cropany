@@ -1,6 +1,7 @@
 import React from "react";
 import * as Ant from "antd";
 import * as Components from "..";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Translate from "./Translate";
 import UserSetting from "./UserSetting";
 
@@ -12,6 +13,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = (props) => {
   const { isOpen, setIsOpen } = props;
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   return (
     <Ant.Layout.Header
       className="border-b px-5 bg-white header"
@@ -21,23 +25,36 @@ const Header: React.FC<HeaderProps> = (props) => {
         <Ant.Col>
           <Ant.Row gutter={16} align="middle">
             <Ant.Col>
-              {!isOpen ? (
-                <Components.Icons.IconBar
-                  className="header__icon"
-                  onClick={() => setIsOpen(!isOpen)}
-                />
-              ) : (
-                <Components.Icons.IconBarClose
-                  className="header__icon"
-                  onClick={() => setIsOpen(!isOpen)}
-                />
-              )}
+              {(() => {
+                if (pathname !== "/staff") {
+                  return (
+                    <Ant.Tooltip title="Quay lại">
+                      <Components.Icons.IconArrowLeft
+                        className="header__icon"
+                        onClick={() => navigate("/staff")}
+                      />
+                    </Ant.Tooltip>
+                  );
+                } else {
+                  return !isOpen ? (
+                    <Components.Icons.IconBar
+                      className="header__icon"
+                      onClick={() => setIsOpen(!isOpen)}
+                    />
+                  ) : (
+                    <Components.Icons.IconBarClose
+                      className="header__icon"
+                      onClick={() => setIsOpen(!isOpen)}
+                    />
+                  );
+                }
+              })()}
             </Ant.Col>
             <Ant.Col>
-              <a className="header__logo" href="#">
+              <Link className="header__logo" to="/staff">
                 <span>Crop</span>
                 <span>any</span>
-              </a>
+              </Link>
             </Ant.Col>
             <Ant.Col>
               <Ant.Input

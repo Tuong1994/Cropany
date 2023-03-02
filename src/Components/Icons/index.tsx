@@ -12,6 +12,8 @@ import IconProject from "./IconProject";
 import IconDocument from "./IconDocument";
 import IconStaff from "./IconStaff";
 import IconColumns from "./IconCollumns";
+import IconArrowLeft from "./IconArrowLeft";
+import IconPen from "./IconPen";
 
 export {
   IconBar,
@@ -28,4 +30,6 @@ export {
   IconDocument,
   IconStaff,
   IconColumns,
+  IconArrowLeft,
+  IconPen,
 };

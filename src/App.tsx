@@ -16,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/staff" element={<Page.Staff.List />} />
         </Route>
         <Route path="/staff/add" element={<Page.Staff.Add />} />
+        <Route path="/staff/edit" element={<Page.Staff.Edit />} />
       </Routes>
     </React.Fragment>
   );

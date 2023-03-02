@@ -93,7 +93,7 @@ const SideNav: React.FC<SideNavProps> = (props) => {
       label: (
         <Item
           title="NHÂN SỰ"
-          link="/"
+          link="/staff"
           icon={<Components.Icons.IconUser />}
           list={staffList}
           isOpen={isOpen}
