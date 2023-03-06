@@ -16,11 +16,11 @@ const IconUser: React.FC<IconUserProps> = (props) => {
         width="28"
         height="28"
         viewBox="0 0 24 24"
-        stroke-width="1"
+        strokeWidth="1"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <circle cx="9" cy="7" r="4"></circle>

@@ -13,6 +13,7 @@ import {
 interface IStaffStore {
   staffs: IStaff[];
   staff: IStaff | null;
+  getList: () => IStaff[];
   getDetail: (id: string) => void;
   addStaff: (staff: IStaff) => void;
   updateStaff: (id: string, staff: IStaff) => void;
@@ -164,12 +165,18 @@ const useStaffStore = create<IStaffStore>((set, get) => ({
   ],
   staff: null,
 
-  getDetail: (id) =>
+  getList: () => {
+    return get().staffs;
+  },
+
+  getDetail: (id) => {
+    console.log(id);
+
     set((state) => ({
       ...state,
       staff: state.staffs.find((s) => s.id === id),
-    })),
-
+    }));
+  },
   addStaff: (staff) => {
     set((state) => ({
       ...state,

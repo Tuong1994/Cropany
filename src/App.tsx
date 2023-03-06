@@ -17,8 +17,8 @@ const App: React.FC = () => {
         <Route path="/" element={<Page.Home isOpen={isOpen} />}>
           <Route path="/staff" element={<Page.Staff.List />} />
         </Route>
-        <Route path="/staff/add" element={<Page.Staff.Add />} />
-        <Route path="/staff/edit" element={<Page.Staff.Edit />} />
+        <Route path="/staff/add" element={<Page.Staff.Form />} />
+        <Route path="/staff/edit" element={<Page.Staff.Form />} />
       </Routes>
 
       <ToastContainer />

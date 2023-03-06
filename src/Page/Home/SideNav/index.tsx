@@ -51,6 +51,7 @@ const SideNav: React.FC<SideNavProps> = (props) => {
         />
       ),
     },
+    { type: "divider" },
     {
       key: "c4",
       label: (
@@ -120,16 +121,35 @@ const SideNav: React.FC<SideNavProps> = (props) => {
         zIndex: 1,
       }}
     >
-      <Ant.Menu
-        style={{
-          background: "rgb(1, 104, 250)",
-          color: "#fff",
-          height: "100vh",
-        }}
-        className="sidenav__menu"
-        mode="vertical"
-        items={items}
-      />
+      <Ant.Row>
+        <Ant.Col>
+          <Ant.Menu
+            items={items}
+            className="sidenav__menu"
+            mode="vertical"
+            style={{
+              background: "rgb(1, 104, 250)",
+              color: "#fff",
+              height: "100vh",
+            }}
+          />
+        </Ant.Col>
+
+        {isOpen && (
+          <Ant.Col>
+            <Ant.Menu
+              items={staffList}
+              className="bg-gray-600 px-1"
+              mode="vertical"
+              style={{
+                maxWidth: "100%",
+                width: "225px",
+                height: "100vh",
+              }}
+            />
+          </Ant.Col>
+        )}
+      </Ant.Row>
     </Ant.Layout.Sider>
   );
 };

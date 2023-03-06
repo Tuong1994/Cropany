@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           <Ant.Row gutter={16} align="middle">
             <Ant.Col>
               {(() => {
-                if (pathname !== "/staff") {
+                if (pathname === "/staff/add" || pathname === "/staff/edit") {
                   return (
                     <Ant.Tooltip title="Quay lại">
                       <Components.Icons.IconArrowLeft

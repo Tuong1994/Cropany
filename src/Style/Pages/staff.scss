@@ -8,14 +8,18 @@
       padding-right: 10px;
       .ant-table-cell {
         font-size: 12px;
-        padding: 8px 5px;
+        padding: 12px 8px;
         color: #666;
+        background: #fff;
+        &:last-child {
+          padding-right: 20px;
+        }
       }
     }
     .ant-table-tbody {
       .ant-table-row {
-        &:hover {
-          background: #dadada;
+        &:hover > .ant-table-cell {
+          background: #f0f0f0;
         }
       }
       .ant-table-cell {

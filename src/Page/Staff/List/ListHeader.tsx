@@ -1,11 +1,17 @@
 import React from "react";
 import * as Ant from "antd";
 import { useNavigate } from "react-router-dom";
+import { IListQuery } from "../../../Models/Base";
 import options from "../../../Options";
 
-interface ListHeaderProps {}
+interface ListHeaderProps {
+  query: IListQuery;
+  handleFilter(query: IListQuery): void;
+}
 
 const ListHeader: React.FC<ListHeaderProps> = (props) => {
+  const { query, handleFilter } = props;
+
   const navigate = useNavigate();
 
   const selectDropdownStyle: React.CSSProperties = {
@@ -38,16 +44,21 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
         </Ant.Col>
       </Ant.Row>
 
-      <Ant.Form className="bg-gray-200 py-3 px-5">
+      <Ant.Form
+        initialValues={query}
+        autoComplete="off"
+        className="bg-gray-200 py-3 px-5"
+        onFinish={handleFilter}
+      >
         <Ant.Row gutter={16} align="middle">
           <Ant.Col span={4}>
-            <Ant.Form.Item className="m-0">
+            <Ant.Form.Item className="m-0" name="searchText">
               <Ant.Input placeholder="Tên, chức vụ, điện thoại, email" />
             </Ant.Form.Item>
           </Ant.Col>
 
           <Ant.Col>
-            <Ant.Form.Item className="m-0">
+            <Ant.Form.Item className="m-0" name="office">
               <Ant.Select
                 showSearch
                 placeholder="Văn phòng"
@@ -65,7 +76,7 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
           </Ant.Col>
 
           <Ant.Col>
-            <Ant.Form.Item className="m-0">
+            <Ant.Form.Item className="m-0" name="department">
               <Ant.Select
                 showSearch
                 placeholder="Phòng ban"
@@ -83,7 +94,7 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
           </Ant.Col>
 
           <Ant.Col>
-            <Ant.Form.Item className="m-0">
+            <Ant.Form.Item className="m-0" name="jobType">
               <Ant.Select
                 placeholder="Loại hình công việc"
                 optionFilterProp="children"
@@ -100,7 +111,7 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
           </Ant.Col>
 
           <Ant.Col>
-            <Ant.Form.Item className="m-0">
+            <Ant.Form.Item className="m-0" name="status">
               <Ant.Select
                 placeholder="Trạng thái"
                 optionFilterProp="children"
@@ -118,7 +129,7 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
 
           <Ant.Col>
             <Ant.Form.Item className="m-0">
-              <Ant.Button className="border-blue-400 text-blue-400">
+              <Ant.Button className="border-blue-400 text-blue-400" htmlType="submit">
                 Lọc
               </Ant.Button>
             </Ant.Form.Item>

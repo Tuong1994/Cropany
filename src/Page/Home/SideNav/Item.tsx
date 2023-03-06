@@ -32,7 +32,7 @@ const Item: React.FC<ItemProps> = (props) => {
         <div className="flex flex-col items-center">
           <span className="mb-1">{icon}</span>
           <small
-            className="text-white text-xs font-semibold"
+            className="text-white text-xs text-gray-100 font-semibold"
             style={{ fontSize: "10px" }}
           >
             {title}

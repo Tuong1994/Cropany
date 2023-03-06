@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import useStaffStore from "../../../Store/Staff";
 import ListHeader from "./ListHeader";
 import TableDropdown from "./TableDropdown";
+import { IListQuery } from "../../../Models/Base";
 
 interface ListProps {}
 
@@ -22,7 +23,9 @@ export interface IActiveCol {
 }
 
 const List: React.FC<ListProps> = (props) => {
-  const staffs = useStaffStore((state) => state.staffs);
+  const getList = useStaffStore((state) => state.getList);
+
+  const [staffs, setStaffs] = React.useState<IStaff[]>([]);
 
   const [avatar, setAvatar] = React.useState<IActiveCol>({
     key: "avatar",
@@ -155,6 +158,7 @@ const List: React.FC<ListProps> = (props) => {
       title: "TRẠNG THÁI",
       dataIndex: "status",
       key: "status",
+      width: 90,
       render: (text) => (
         <Ant.Tag
           color={text === EStaffStatus.active ? "green" : "red"}
@@ -192,7 +196,7 @@ const List: React.FC<ListProps> = (props) => {
       },
       filterIcon: () => {
         return (
-          <div title="Ẩn/Hiển thị cột dữ liệu" className="cursor-pointer mr-5">
+          <div title="Ẩn/Hiển thị cột dữ liệu" className="cursor-pointer">
             <Components.Icons.IconColumns className="text-black" />
           </div>
         );
@@ -213,9 +217,47 @@ const List: React.FC<ListProps> = (props) => {
       c.key === "action"
   );
 
+  const query: IListQuery = {
+    searchText: "",
+    positionType: null,
+    office: null,
+    department: null,
+    jobType: null,
+    status: null,
+  };
+
+  React.useEffect(() => {
+    const list = getList();
+    setStaffs(list);
+  }, []);
+
+  const handleFilter = (query: IListQuery) => {
+    let filterList = getList();
+
+    console.log(filterList);
+
+    filterList = filterList.filter((l) => {
+      if (
+        query["searchText"] &&
+        query["searchText"].toLowerCase().includes(l.name.toLowerCase())
+      )
+        return true;
+
+      if (query["office"] && query["office"] === l.office) return true;
+      if (query["department"] && query["department"] === l.department)
+        return true;
+      if (query["jobType"] && query["jobType"] === l.jobType) return true;
+      if (query["status"] && query["status"] === l.status) return true;
+
+      return false;
+    });
+
+    setStaffs(filterList);
+  };
+
   return (
     <Ant.Layout className="staff__list">
-      <ListHeader />
+      <ListHeader query={query} handleFilter={handleFilter} />
 
       <Ant.Table
         className="list__table"
@@ -224,12 +266,18 @@ const List: React.FC<ListProps> = (props) => {
         sticky={{ offsetHeader: 65 }}
         pagination={{
           position: ["bottomCenter"],
+          style: { margin: 0 },
           total: staffs.length,
           defaultCurrent: 1,
           defaultPageSize: 20,
           showSizeChanger: true,
-          showTotal: (total, range) =>
-            `Kết quả từ ${range[0]} đến ${range[1]} trên tổng số ${total} dòng`,
+          rootClassName: "p-4 hover:bg-gray-200",
+          locale: { items_per_page: "/ trang" },
+          showTotal: (total, range) => (
+            <div className="text-gray-600 mr-5">
+              Kết quả từ {range[0]} đến {range[1]} trên tổng số {total} dòng
+            </div>
+          ),
         }}
       />
     </Ant.Layout>

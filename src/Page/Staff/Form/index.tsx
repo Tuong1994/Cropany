@@ -1,20 +1,21 @@
 import React from "react";
 import * as Ant from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
 import { IStaff } from "../../../Models/Staff";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import EditHeader from "./EditHeader";
+import AddHeader from "./FormHeader";
 import Account from "./Account";
-import ModalPassword from "./ModalPassword";
 import Contact from "./Contact";
 import Info from "./Info";
 import Status from "./Status";
 import useStaffStore from "../../../Store/Staff";
+import ModalPassword from "./ModalPassword";
+import utils from "../../../Utils";
 
-interface EditProps {}
+interface StaffFormProps {}
 
-const Edit: React.FC<EditProps> = (props) => {
-  const { state } = useLocation();
+const StaffForm: React.FC<StaffFormProps> = (props) => {
+  const { state, pathname } = useLocation();
 
   const [form] = Ant.Form.useForm();
 
@@ -28,33 +29,37 @@ const Edit: React.FC<EditProps> = (props) => {
 
   const getDetail = useStaffStore((state) => state.getDetail);
 
+  const addStaff = useStaffStore((state) => state.addStaff);
+
   const updateStaff = useStaffStore((state) => state.updateStaff);
 
   React.useEffect(() => {
-    getDetail(state.id);
-  });
-
-  console.log(staff);
+    if (pathname === "/staff/edit") {
+      getDetail(state?.id);
+    }
+  }, [state, pathname]);
 
   React.useEffect(() => {
-    form.setFieldsValue({
-      email: staff?.email ?? "",
-      name: staff?.name ?? "",
-      phone: staff?.phone ?? "",
-      position: staff?.position ?? "",
-      staffId: staff?.staffId ?? "",
-      gender: staff?.gender ?? null,
-      positionType: staff?.positionType ?? null,
-      office: staff?.office ?? null,
-      department: staff?.department ?? null,
-      jobType: staff?.jobType ?? null,
-      timeKeeping: staff?.timeKeeping ?? null,
-      status: staff?.status ?? null,
-    });
-  }, [staff]);
+    if (pathname === "/staff/edit")
+      form.setFieldsValue({
+        email: staff?.email ?? "",
+        name: staff?.name ?? "",
+        phone: staff?.phone ?? "",
+        position: staff?.position ?? "",
+        staffId: staff?.staffId ?? "",
+        gender: staff?.gender ?? null,
+        positionType: staff?.positionType ?? null,
+        office: staff?.office ?? null,
+        department: staff?.department ?? null,
+        jobType: staff?.jobType ?? null,
+        timeKeeping: staff?.timeKeeping ?? null,
+        status: staff?.status ?? null,
+      });
+  }, [state, pathname, staff]);
 
   const initialValues: IStaff = {
     email: "",
+    password: "",
     name: "",
     phone: "",
     position: "",
@@ -70,22 +75,38 @@ const Edit: React.FC<EditProps> = (props) => {
 
   const onSubmit = (staff: IStaff) => {
     setIsSubmitting(true);
-    updateStaff(state.id, staff);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast.success("Cập nhật thành công");
-      navigate("/staff");
-    }, 500);
+    if (pathname === "/staff/edit") {
+      updateStaff(state?.id, staff);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        toast.success("Cập nhật thành công");
+        navigate("/staff");
+      }, 500);
+    } else {
+      const newId = utils.uuid();
+      const newStaff: IStaff = {
+        ...staff,
+        id: newId,
+        key: newId,
+      };
+      addStaff(newStaff);
+      setTimeout(() => {
+        form.resetFields();
+        toast.success("Thêm mới thành công");
+        setIsSubmitting(false);
+        navigate("/staff/edit", { state: { id: newId } });
+      }, 500);
+    }
   };
 
   return (
     <React.Fragment>
       <Ant.Layout>
-        <EditHeader />
+        <AddHeader pathname={pathname} />
 
         <Ant.Form
-          form={form}
           layout="vertical"
+          form={form}
           initialValues={initialValues}
           onFinish={onSubmit}
           autoComplete="off"
@@ -93,7 +114,7 @@ const Edit: React.FC<EditProps> = (props) => {
           <Ant.Row>
             <Ant.Col span={18}>
               <Ant.Layout.Content className="bg-white px-2">
-                <Account setIsOpen={setIsOpen} />
+                <Account pathname={pathname} setIsOpen={setIsOpen} />
                 <Contact />
 
                 <Ant.Divider />
@@ -112,7 +133,7 @@ const Edit: React.FC<EditProps> = (props) => {
       </Ant.Layout>
 
       <ModalPassword
-        id={state.id}
+        id={state?.id}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         getDetail={getDetail}
@@ -121,4 +142,4 @@ const Edit: React.FC<EditProps> = (props) => {
   );
 };
 
-export default Edit;
+export default StaffForm;
